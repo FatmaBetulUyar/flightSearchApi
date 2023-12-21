@@ -3,7 +3,6 @@ package com.amadeus.flightSearchApi.entity;
 
 import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "flights")
@@ -20,15 +19,22 @@ public class Flight {
     @ManyToOne
     @JoinColumn(name = "arrival_airport_id")
     private Airport arrivalAirport;
+    private String departureTime;
+    private String returnTime;
 
     @Column(name = "departure_date_time")
-    private LocalDateTime departureDateTime;
+    private String departureDate;
 
     @Column(name = "return_date_time")
-    private LocalDateTime returnDateTime;
+    private String returnDate;
 
     @Column(name = "price")
     private Double price;
+
+    public static Flight getInstance() {
+        Flight flight = new Flight();
+        return flight;
+    }
 
     public Long getId() {
         return id;
@@ -54,20 +60,36 @@ public class Flight {
         this.arrivalAirport = arrivalAirport;
     }
 
-    public LocalDateTime getDepartureDateTime() {
-        return departureDateTime;
+    public String getDepartureTime() {
+        return departureTime;
     }
 
-    public void setDepartureDateTime(LocalDateTime departureDateTime) {
-        this.departureDateTime = departureDateTime;
+    public void setDepartureTime(String departureTime) {
+        this.departureTime = departureTime;
     }
 
-    public LocalDateTime getReturnDateTime() {
-        return returnDateTime;
+    public String getReturnTime() {
+        return returnTime;
     }
 
-    public void setReturnDateTime(LocalDateTime returnDateTime) {
-        this.returnDateTime = returnDateTime;
+    public void setReturnTime(String returnTime) {
+        this.returnTime = returnTime;
+    }
+
+    public String getDepartureDate() {
+        return departureDate;
+    }
+
+    public void setDepartureDate(String departureDate) {
+        this.departureDate = departureDate;
+    }
+
+    public String getReturnDate() {
+        return returnDate;
+    }
+
+    public void setReturnDate(String returnDate) {
+        this.returnDate = returnDate;
     }
 
     public Double getPrice() {
@@ -77,4 +99,5 @@ public class Flight {
     public void setPrice(Double price) {
         this.price = price;
     }
+
 }

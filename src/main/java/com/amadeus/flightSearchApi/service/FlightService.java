@@ -1,12 +1,13 @@
 package com.amadeus.flightSearchApi.service;
 
+import com.amadeus.flightSearchApi.dto.OneWayFlight;
+import com.amadeus.flightSearchApi.dto.TwoWayFlight;
 import com.amadeus.flightSearchApi.entity.Flight;
-import org.springframework.http.ResponseEntity;
 
 import java.util.List;
 
 public interface FlightService {
-    ResponseEntity<List<Flight>> getAllFlights();
+    List<Flight> getAllFlights();
 
     Flight getFlight(Long id);
 
@@ -15,4 +16,7 @@ public interface FlightService {
     Flight updateFlight(Long id, Flight flight);
 
     void deleteFlight(Long id);
+
+    public TwoWayFlight searchTwoWayFlightFlight(String departureAirport, String arrivalAirport, String departureDate, String returnDate);
+    public OneWayFlight searchOneWayFlightFlight(String departureAirport, String arrivalAirport, String departureDate);
 }

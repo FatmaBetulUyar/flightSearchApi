@@ -20,7 +20,8 @@ public class AirportController {
 
     @GetMapping(value = "/getAll")
     public ResponseEntity<List<Airport>> getAllAirports() {
-        return airportService.getAllAirports();
+        return new ResponseEntity<>(airportService.getAllAirports(), HttpStatus.OK);
+
     }
 
     @GetMapping(value = "/{id}")

@@ -3,7 +3,6 @@ package com.amadeus.flightSearchApi.service.impl;
 import com.amadeus.flightSearchApi.entity.Airport;
 import com.amadeus.flightSearchApi.repository.AirportRepository;
 import com.amadeus.flightSearchApi.service.AirportService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +17,8 @@ public class AirportServiceImpl implements AirportService {
     }
 
     @Override
-    public ResponseEntity<List<Airport>> getAllAirports() {
-        return (ResponseEntity<List<Airport>>) airportRepository.findAll();
+    public List<Airport> getAllAirports() {
+        return  airportRepository.findAll();
     }
 
     @Override
@@ -42,5 +41,13 @@ public class AirportServiceImpl implements AirportService {
     @Override
     public void deleteAirport(Long id) {
         airportRepository.deleteById(id);
+    }
+
+    public Airport getByCity(String city){
+        Optional<Airport> airport =  airportRepository.findByCity(city);
+        if (airport.isEmpty()){
+            throw new RuntimeException("airport bulunamadi");
+        }
+        return airport.get();
     }
 }

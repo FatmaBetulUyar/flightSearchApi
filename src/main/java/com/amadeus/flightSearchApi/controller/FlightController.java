@@ -1,5 +1,7 @@
 package com.amadeus.flightSearchApi.controller;
 
+import com.amadeus.flightSearchApi.dto.OneWayFlight;
+import com.amadeus.flightSearchApi.dto.TwoWayFlight;
 import com.amadeus.flightSearchApi.entity.Flight;
 import com.amadeus.flightSearchApi.service.FlightService;
 import org.springframework.http.HttpStatus;
@@ -19,13 +21,31 @@ public class FlightController {
 
     @GetMapping(value = "/getAll")
     public ResponseEntity<List<Flight>>getAllFlights() {
-        return flightService.getAllFlights();
+        return new ResponseEntity<>(flightService.getAllFlights(),HttpStatus.OK);
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> getAirport(@PathVariable Long id) {
         Flight flight = flightService.getFlight(id);
         return new ResponseEntity<>(flight, HttpStatus.OK);
+    }
+    @GetMapping("/flights/twoWay")
+    public TwoWayFlight getFlights(
+            @RequestParam String departureCity,
+            @RequestParam String arrivalCity,
+            @RequestParam String departureDate,
+            @RequestParam String returnDate
+    ) {
+        return flightService.searchTwoWayFlightFlight(departureCity, arrivalCity, departureDate, returnDate);
+    }
+    @GetMapping("/flights/oneWay")
+    public OneWayFlight getFlights(
+            @RequestParam String departureCity,
+            @RequestParam String arrivalCity,
+            @RequestParam String departureDate
+
+    ) {
+            return flightService.searchOneWayFlightFlight(departureCity, arrivalCity, departureDate);
     }
 
     @PostMapping(value = "/create")
