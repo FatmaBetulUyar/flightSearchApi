@@ -4,6 +4,7 @@ import com.amadeus.flightSearchApi.dto.OneWayFlight;
 import com.amadeus.flightSearchApi.dto.TwoWayFlight;
 import com.amadeus.flightSearchApi.entity.Airport;
 import com.amadeus.flightSearchApi.entity.Flight;
+import com.amadeus.flightSearchApi.exception.NotFoundException;
 import com.amadeus.flightSearchApi.repository.FlightRepository;
 import com.amadeus.flightSearchApi.service.AirportService;
 import com.amadeus.flightSearchApi.service.FlightService;
@@ -40,7 +41,7 @@ public class FlightServiceImpl implements FlightService {
     @Override
     public Flight getFlight(Long id) {
         Optional<Flight> byId = flightRepository.findById(id);
-        return byId.orElseThrow(() -> new RuntimeException("Airport Not Found"));
+        return byId.orElseThrow(() -> new NotFoundException("Flight"));
     }
 
     public List<Flight> searchFlight( Airport departure,  Airport arrival, String departureDate){
