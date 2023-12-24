@@ -68,6 +68,11 @@ public class FlightServiceImpl implements FlightService {
     public Flight addFlight(Flight flight) {
         return  flightRepository.save(flight);
     }
+    @Override
+    public List<Flight> addFlights(List<Flight> flights) {
+        return  flightRepository.saveAll(flights);
+    }
+
 
     @Override
     public Flight updateFlight(Long id, Flight flight) {

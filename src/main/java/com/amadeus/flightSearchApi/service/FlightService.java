@@ -12,6 +12,7 @@ public interface FlightService {
     Flight getFlight(Long id);
 
     Flight addFlight(Flight flight);
+    List<Flight> addFlights(List<Flight> flights);
 
     Flight updateFlight(Long id, Flight flight);
 

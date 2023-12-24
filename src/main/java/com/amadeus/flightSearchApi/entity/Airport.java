@@ -13,6 +13,11 @@ public class Airport {
     @Column(name = "city")
     private String city;
 
+    public static Airport getInstance() {
+        Airport airport = new Airport();
+        return airport;
+    }
+
     public Long getId() {
         return id;
     }
